@@ -53,8 +53,19 @@ function animalCount(species) {
   // seu código aqui
 }
 
+const getSubTotal = (array) => {
+  if (array[0] === 'Child') return data.prices.Child * array[1];
+  if (array[0] === 'Adult') return data.prices.Adult * array[1];
+  return data.prices.Senior * array[1];
+};
+
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (!entrants || Object.entries(entrants).length === 0) return 0;
+  let total = 0;
+  Object.entries(entrants).forEach((e) => {
+    total += getSubTotal(e);
+  });
+  return total;
 }
 
 function animalMap(options) {
