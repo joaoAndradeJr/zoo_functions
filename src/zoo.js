@@ -106,8 +106,19 @@ const allEmployeesCoverage = () => {
   return all;
 };
 
+const findEmployee = (idOrName) => {
+  const { firstName, lastName, responsibleFor } = data.employees.find((e) => (
+    e.id === idOrName || e.firstName === idOrName || e.lastName === idOrName
+  ));
+  return { firstName, lastName, responsibleFor };
+};
+
 function employeeCoverage(idOrName) {
   if (!idOrName) return allEmployeesCoverage();
+  const { firstName, lastName, responsibleFor } = findEmployee(idOrName);
+  const responsible = findSpecies(responsibleFor);
+  const fullName = `${firstName} ${lastName}`;
+  return { [fullName]: responsible };
 }
 
 module.exports = {
