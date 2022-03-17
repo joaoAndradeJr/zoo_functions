@@ -49,8 +49,18 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
+const getAllAnimalsCount = () => {
+  const allAnimals = {};
+  data.animals.forEach((e) => {
+    allAnimals[e.name] = e.residents.length;
+  });
+  return allAnimals;
+};
+
 function animalCount(species) {
-  // seu código aqui
+  if (!species) return getAllAnimalsCount();
+  const { residents } = data.animals.find((e) => e.name === species);
+  return residents.length;
 }
 
 const getSubTotal = (array) => {
