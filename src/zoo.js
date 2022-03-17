@@ -68,6 +68,7 @@ function entryCalculator(entrants) {
   return total;
 }
 
+/*
 function animalMap(options) {
   // seu código aqui
 }
@@ -75,17 +76,7 @@ function animalMap(options) {
 function schedule(dayName) {
   // seu código aqui
 }
-
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
-}
-
-function increasePrices(percentage) {
-  Object.entries(data.prices).forEach((e) => {
-    const type = e[0];
-    data.prices[type] = Math.round((data.prices[type] * (1 + (percentage / 100))) * 100) / 100;
-  });
-}
+*/
 
 const findSpecies = (array) => {
   const species = [];
@@ -95,6 +86,27 @@ const findSpecies = (array) => {
     })));
   return species;
 };
+
+function oldestFromFirstSpecies(id) {
+  const { responsibleFor } = data.employees.find((e) => e.id === id);
+  const { residents } = data.animals.find((e) => e.id === responsibleFor[0]);
+  let bigger = 0;
+  let oldest = '';
+  residents.forEach((e) => {
+    if (e.age > bigger) {
+      oldest = [e.name, e.sex, e.age];
+      bigger = e.age;
+    }
+  });
+  return oldest;
+}
+
+function increasePrices(percentage) {
+  Object.entries(data.prices).forEach((e) => {
+    const type = e[0];
+    data.prices[type] = Math.round((data.prices[type] * (1 + (percentage / 100))) * 100) / 100;
+  });
+}
 
 const allEmployeesCoverage = () => {
   const all = {};
@@ -123,9 +135,9 @@ function employeeCoverage(idOrName) {
 
 module.exports = {
   entryCalculator,
-  schedule,
+  // schedule,
   animalCount,
-  animalMap,
+  // animalMap,
   animalsByIds,
   employeeByName,
   employeeCoverage,
