@@ -87,8 +87,27 @@ function increasePrices(percentage) {
   });
 }
 
+const findSpecies = (array) => {
+  const species = [];
+  array.forEach((id) => (
+    data.animals.forEach((e) => {
+      if (e.id === id) species.push(e.name);
+    })));
+  return species;
+};
+
+const allEmployeesCoverage = () => {
+  const all = {};
+  data.employees.forEach((e) => {
+    const fullName = `${e.firstName} ${e.lastName}`;
+    const responsible = findSpecies(e.responsibleFor);
+    all[fullName] = responsible;
+  });
+  return all;
+};
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  if (!idOrName) return allEmployeesCoverage();
 }
 
 module.exports = {
